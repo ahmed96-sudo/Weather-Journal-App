@@ -2,7 +2,7 @@
 
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 let key = 'e8061c668de8443c751686bb1c382c8b';
-let port = process.env.PORT;
+let port = 36282;
 if (port == null || port == "") {
   port = 8080;
 }
