@@ -21,15 +21,16 @@ app.use(cors());
 
 // Initialize the main project folder
 app.use(express.static('website'));
-const port = 8080;
-
-//Spin up the server
-const server = app.listen(port, listening);
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
+app.listen(port, listening);
 
 // Callback to debug
 function listening(){
     console.log('server running');
-    console.log(`running on localhost: ${port}`);
+    console.log(`running on host: ${port}`);
 };
 
 //GET route that returns the projectData object

@@ -2,6 +2,10 @@
 
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
 let key = 'e8061c668de8443c751686bb1c382c8b';
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8080;
+}
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -16,8 +20,9 @@ function performAction(e){
     getTemperature(baseURL, postCode, key)
     .then(function (data){
         // Add data to POST request
-        postData('http://localhost:8080/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
+        //postData('http://localhost:8080/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
         // Function which updates UI
+        postData('https://weather-app-jrnal.herokuapp.com:'+ port +'/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
         .then(function() {
             updateUI()
         })
@@ -61,7 +66,8 @@ const postData = async (url = '', data = {}) => {
 
 // Update user interface
 const updateUI = async () => {
-    const request = await fetch('http://localhost:8080/all');
+    //const request = await fetch('http://localhost:8080/all');
+    const request = await fetch('https://weather-app-jrnal.herokuapp.com:'+ port +'/all');
     try {
         const allData = await request.json();
         document.getElementById('date').innerHTML = allData.date;
