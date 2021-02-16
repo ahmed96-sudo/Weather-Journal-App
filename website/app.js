@@ -2,6 +2,7 @@
 
 let baseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 let key = 'e8061c668de8443c751686bb1c382c8b';
+let unit = 'metric';
 /*let port = 36282;
 if (port == null || port == "") {
   port = 8080;
@@ -17,7 +18,7 @@ function performAction(e){
     const countryName = document.getElementById('country_name').value;
     const feelings = document.getElementById('feelings').value;
     console.log(newDate);
-    getTemperature(baseURL, countryName, key)
+    getTemperature(baseURL, countryName, unit, key)
     .then(function (data){
         // Add data to POST request
         //postData('http://localhost:8080/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
@@ -31,9 +32,10 @@ function performAction(e){
 }
 
 // Async GET
-const getTemperature = async (baseURL, countryName, key)=>{
+const getTemperature = async (baseURL, countryName, unit, key)=>{
 // const getTemperatureDemo = async (url)=>{
-    const response = await fetch(baseURL + countryName + '&appid=' + key)
+    //const response = await fetch(baseURL + countryName + '&appid=' + key)
+    const response = await fetch(baseURL + countryName + '&units=' + unit + '&appid=' + key)
     console.log('Response', response);
     try {
         const data = await response.json();
