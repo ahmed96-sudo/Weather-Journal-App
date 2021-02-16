@@ -1,6 +1,6 @@
 /* Global Variables */
 
-let baseURL = 'https://api.openweathermap.org/data/2.5/weather?zip=';
+let baseURL = 'https://api.openweathermap.org/data/2.5/weather?q=';
 let key = 'e8061c668de8443c751686bb1c382c8b';
 /*let port = 36282;
 if (port == null || port == "") {
@@ -14,10 +14,10 @@ let newDate = d.toLocaleString('en-US', { month: 'long', day: 'numeric', year: '
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e){
-    const postCode = document.getElementById('zip').value;
+    const countryName = document.getElementById('country_name').value;
     const feelings = document.getElementById('feelings').value;
     console.log(newDate);
-    getTemperature(baseURL, postCode, key)
+    getTemperature(baseURL, countryName, key)
     .then(function (data){
         // Add data to POST request
         //postData('http://localhost:8080/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
@@ -31,9 +31,9 @@ function performAction(e){
 }
 
 // Async GET
-const getTemperature = async (baseURL, postCode, key)=>{
+const getTemperature = async (baseURL, countryName, key)=>{
 // const getTemperatureDemo = async (url)=>{
-    const response = await fetch(baseURL + postCode + ',us' + '&APPID=' + key)
+    const response = await fetch(baseURL + countryName + '&appid=' + key)
     console.log('Response', response);
     try {
         const data = await response.json();
