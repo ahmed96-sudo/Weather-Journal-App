@@ -24,7 +24,7 @@ function performAction(e){
         //postData('http://localhost:8080/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
         // Function which updates UI
         //postData('https://weather-app-jrnal.herokuapp.com:'+ port +'/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
-        postData('https://weather-app-jrnal.herokuapp.com/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
+        postData('/addWeatherData', {temperature: data.main.temp, date: newDate, user_response: feelings } )
         .then(function() {
             updateUI()
         })
@@ -70,7 +70,7 @@ const postData = async (url = '', data = {}) => {
 // Update user interface
 const updateUI = async () => {
     //const request = await fetch('http://localhost:8080/all');
-    const request = await fetch('https://weather-app-jrnal.herokuapp.com/all');
+    const request = await fetch('/all');
     try {
         const allData = await request.json();
         document.getElementById('date').innerHTML = allData.date;
